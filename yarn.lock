@@ -167,14 +167,13 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@develop-fapp/ui-kit-fapp@0.1.59":
-  version "0.1.59"
-  resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.59.tgz#a653ff71ed5d9afe09222379036565560046acec"
-  integrity sha512-RKf9i/rzxwulvvaKMNWNF5py5QnllPrnOfJWJZZXMw9OBvKgX38RedmzsztAEvKeuMFNHUYDnhBFRq00aXi5CA==
+"@develop-fapp/ui-kit-fapp@0.1.48":
+  version "0.1.48"
+  resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.48.tgz#3e1d705b2f7635aed976801fdf1e7b1c13a339e9"
+  integrity sha512-ufGSbVFnJcyGOURjUL4UmXczRQmnxPgpjBs0+ApMAiHNNLHQS2BMCqJmlUEJFxqvRPrm1ARrCAc+2qBl74pNMA==
   dependencies:
     eslint-config-prettier "^8.3.0"
     eslint-plugin-prettier "^4.0.0"
-    framer-motion "^4.1.17"
     iconsax-react "^0.0.8"
     prism-react-renderer "^1.2.1"
     react-select "^5.2.1"

@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@develop-fapp/ui-kit-fapp": "^0.1.60",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.8.2",
@@ -19,7 +18,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-drag-drop-files": "^2.3.7",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "@develop-fapp/ui-kit-fapp": "0.1.48"
   },
   "devDependencies": {
     "@types/node": "^15.12.2",
