@@ -8,7 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@develop-fapp/ui-kit-fapp": "0.1.59",
+    "@develop-fapp/ui-kit-fapp": "^0.1.60",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.8.2",
     "@netlify/plugin-nextjs": "^4.7.1",
     "framer-motion": "^4.1.17",
     "iconsax-react": "^0.0.8",
