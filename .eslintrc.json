@@ -26,7 +26,6 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
     ],
     "rules": {
       "react/prop-types": "off",
