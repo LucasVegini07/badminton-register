@@ -1,39 +1,44 @@
-# Next + Netlify Starter
+<p align="center">
+  <a href="https://aluiziodeveloper.com.br/">
+    <img alt="Aluizio Developer" src="https://aluiziodeveloper.com.br/assets/img/icon.png" width="200" />
+  </a>
+</p>
+<h2 align="center">
+Informação sobre tecnologia, dicas, tutoriais, mini-cursos e muito mais.
+</h2>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
+### Curso React Essencial com Next.js, Typescript, Styled Components, SASS, Prismic CMS, Code Splitting, Testes Automatizados, Deploy, etc.
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+Seja muito bem-vindo e bem-vinda ao curso prático: React Essencial com Next.js, Typescript, Styled Components, SASS, Prismic CMS, Code Splitting, Testes Automatizados, Deploy, entre outros recursos.
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. It also includes the [Essential Next.js Build Plugin](https://github.com/netlify/netlify-plugin-nextjs), which will allow for you to implement features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing.
+Acesse a [página do curso na Udemy](https://www.udemy.com/course/curso-pratico-react-e-nextjs-essencial-com-typescript/?referralCode=BA1163FFEC7ADD378DFF) para conferir o conteúdo.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+Este repositório Git é a estrutura inicial já com toda a configuração básica de uma das aplicações que aprenderemos a criar ao longo do curso. O nome do app é DevNews!.
 
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
+## Rodando a aplicação no seu PC
 
-## Getting Started
+Faça um clone deste repositório e instale no seu ambiente de desenvolvimento usando o seguinte comando no seu terminal (escolha um diretório apropriado):
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
+```shell
+git clone https://github.com/aluiziodeveloper/nextjs-devnews-instalacao.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Após clonar o conteúdo do repositório, acesse o diretório criado e efetue a instalação das dependências:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```shell
+cd nextjs-devnews-instalacao
 
-### Installation options
+npm install
+```
 
-**Option one:** One-click deploy
+Após essa instalação execute a aplicação com o comando `npm run dev`. A aplicação estará disponível no endereço `http://localhost:3000`.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+## Redes Sociais
 
-**Option two:** Manual clone
+[Site Aluizio Developer](https://aluiziodeveloper.com.br)
 
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
-3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
+[YouTube](https://www.youtube.com/jorgealuizio)
+
+[Servidor no Discord](https://discord.gg/3J87BMz5fD)
+
+[LinkedIn](https://www.linkedin.com/in/jorgealuizio/)
