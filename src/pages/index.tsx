@@ -1,4 +1,5 @@
-import { Container, Text } from "@develop-fapp/ui-kit-fapp";
+import { Text } from "@develop-fapp/ui-kit-fapp";
+import { Container } from "~/components/Container";
 
 import { Button } from "~/components/Button";
 

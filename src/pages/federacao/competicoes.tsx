@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Template from "../../components/Template/Federation";
 import { useGeneralContext } from "~/context/GeneralContext";
+import { Container } from "~/components/Container";
 
 import { Edit2, Trash } from "iconsax-react";
 import {
-  Container,
   Button,
   Text,
   Modal,

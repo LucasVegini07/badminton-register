@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Home, Command, Briefcase } from "iconsax-react";
+import { Container } from "~/components/Container";
 import {
-  Container,
   MainComponent,
   Navbar,
   Sidebar,

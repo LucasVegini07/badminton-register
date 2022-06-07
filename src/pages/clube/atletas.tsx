@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Template from "../../components/Template/Federation";
 import { useGeneralContext } from "~/context/GeneralContext";
 import Upload from "~/components/upload";
+import { Container } from "~/components/Container";
 
 import { Edit2, Trash } from "iconsax-react";
 import {
-  Container,
   Button,
   Text,
   Modal,
@@ -160,7 +160,11 @@ const HomePage = () => {
         />
         <div style={{ marginBottom: "16px" }} />
 
-        <Container justifyContent="center" container="fluid" style={{ marginBottom: "16px" }}>
+        <Container
+          justifyContent="center"
+          container="fluid"
+          style={{ marginBottom: "16px" }}
+        >
           <Upload />
         </Container>
         <Grid xs="1fr 1fr" spacing="16px">
