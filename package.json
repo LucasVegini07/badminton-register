@@ -8,13 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@develop-fapp/ui-kit-fapp": "0.1.48",
+    "@netlify/plugin-nextjs": "^4.7.1",
     "next": "9.5.2",
     "next-images": "^1.4.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "styled-components": "^5.1.1",
-    "@netlify/plugin-nextjs": "^4.7.1",
-    "@develop-fapp/ui-kit-fapp": "0.1.48"
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "^14.6.0",
