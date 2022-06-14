@@ -1,39 +1,24 @@
-import { Text } from "@develop-fapp/ui-kit-fapp";
-import { Container } from "~/components/Container";
+import React from 'react'
+import Head from 'next/head'
 
-import { Button } from "~/components/Button";
+import RocketseatLogo from '../assets/rocketseat.svg'
 
-import { useRouter } from "next/router";
-export default function Home() {
-  const router = useRouter();
+import { Container } from '../styles/pages/Home'
+import { Button } from '@develop-fapp/ui-kit-fapp'
 
+const Home: React.FC = () => {
   return (
-    <Container
-      container="fluid"
-      style={{ height: "100vh" }}
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
-    >
-      <Text style={{ marginBottom: "16px" }}>
-        Pagina de login em construção
-      </Text>
-      <Text style={{ marginBottom: "16px" }}>
-        Para acessar os níveis da federação ou do representante de clube utilize
-        os botões abaixo
-      </Text>
-      <Container justifyContent="center">
-        <Button
-          variant="contained"
-          onClick={() => router.push("/federacao")}
-          style={{ marginRight: "16px" }}
-        >
-          Fededação
-        </Button>
-        <Button variant="contained" onClick={() => router.push("/clube")}>
-          Representante de clube
-        </Button>
-      </Container>
+    <Container>
+      <Head>
+        <title>Homepage</title>
+      </Head>
+
+      <RocketseatLogo />
+      <h1>ReactJS Structure</h1>
+      <Button variant="contained">Teste</Button>
+      <p>A ReactJS + Next.js structure made by Rocketseat.</p>
     </Container>
-  );
+  )
 }
+
+export default Home
