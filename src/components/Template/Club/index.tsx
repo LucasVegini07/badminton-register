@@ -1,12 +1,10 @@
 import React, { ReactNode, useState } from 'react';
 import { Home, Command, Profile2User } from 'iconsax-react';
-import {
-  Container,
-  MainComponent,
-  Navbar,
-  Sidebar,
-  Text,
-} from '@develop-fapp/ui-kit-fapp';
+import { Container, Text } from '@develop-fapp/ui-kit-fapp';
+
+import { Sidebar } from '../../Sidebar/Sidebar';
+import { MainComponent } from '../../Sidebar/Main';
+import { Navbar } from '../../Sidebar/Navbar';
 
 interface Props {
   children: ReactNode;
