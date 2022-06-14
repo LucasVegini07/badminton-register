@@ -1,45 +1,48 @@
-# Web Client
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Executando projeto
-### Na raiz do projeto realizar o comando:
+## Getting Started
 
-```yarn ```
+Install dependencies:
+```bash
+yarn
+# or
+npm install
+```
 
-### Subindo a aplicação:
+Running the development server:
 
-```yarn dev```
+```bash
+npm run dev
+# or
+yarn dev
+```
 
+Running tests:
+```bash
+yarn test
+# or
+npm run test
+```
 
-### Domain:
-- Os contextos e hooks react são implementados dentro de suas respecitivas parastas
-- models: responsável por manter uma interface que represente o domínio
-- services: responsavel por manter a interface de um serviço(arquivos terminados com "Skeleton");
-- services/implementations: Implementação a interface Skeleton
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-### Infra:
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-- A camada mais externa da aplicação(usada para ORM's, clientes http, sockets e etc);
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-### main/factories:
+## Learn More
 
-- Responsável um componente que represente uma página da aplicação. Em factories instanciamos e repassamos implementações necessárias para uma página functionar;
+To learn more about Next.js, take a look at the following resources:
 
-### Shared:
-- Responsável por manter hooks, contextos, componentes e demais estruturas compartilhadas entre vários domínios
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Presentation:
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-- A camada mais negocial da aplicação onde toda a lógica do componente é desenvolvida
+## Deploy on Vercel
 
-### Pages:
-- Pasta nativa next, responsável por manter as rotas da aplicação e implementações de server-side
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-
-## Documentação sobre commits:
-
-https://www.conventionalcommits.org/en/v1.0.0/
-
-
-
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

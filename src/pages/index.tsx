@@ -1,18 +1,12 @@
+import { Button } from '@develop-fapp/ui-kit-fapp';
 import React from 'react';
 
-import Head from 'next/head';
-
-import HomePageFactory from '../main/factories/Home';
-
-const Home: React.FC = () => {
+const InitialPage: React.FC = () => {
   return (
-    <>
-      <Head>
-        <title>Home</title>
-      </Head>
-      <HomePageFactory />
-    </>
+    <div>
+      <Button variant="contained">dsadasdas</Button>
+    </div>
   );
 };
 
-export default Home;
+export default InitialPage;

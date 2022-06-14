@@ -1,0 +1,29 @@
+pipelines:
+  branches:
+    development:
+      - step:
+          oidc: true
+          name: build app
+          deployment: development
+          image: node:14.18
+          script:
+            # CREATE .ENV WITH TOKENS
+            - echo "REACT_APP_STRAPI_URL=$BACKEND_URL" >> .env
+            - npm install
+            - unset CI
+            - npm run build
+            - pipe: atlassian/aws-s3-deploy:1.1.0
+              variables:
+                AWS_DEFAULT_REGION: $AWS_REGION
+                AWS_OIDC_ROLE_ARN: $AWS_ROLE_ARN
+                S3_BUCKET: $S3_BUCKET
+                LOCAL_PATH: 'out'
+                ACL: 'public-read'
+            - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+              variables:
+                AWS_DEFAULT_REGION: $AWS_REGION
+                AWS_OIDC_ROLE_ARN: $AWS_ROLE_ARN
+                DISTRIBUTION_ID: $DISTRIBUTION_ID
+                PATHS: "/*"
+          artifacts:
+            - out/**

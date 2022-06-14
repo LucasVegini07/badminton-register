@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -26,10 +25,12 @@ export default class MyDocument extends Document {
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
-        styles: [
-          ...React.Children.toArray(initialProps.styles),
-          sheet.getStyleElement(),
-        ],
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
       };
     } finally {
       sheet.seal();
@@ -40,19 +41,19 @@ export default class MyDocument extends Document {
     return (
       <Html lang="pt">
         <Head>
-          <meta content="text/html;charset=UTF-8" />
+          <meta charSet="utf-8" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap"
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap"
             rel="stylesheet"
-          />
-          <link
-            rel="shortcut icon"
-            href="/images/favicon.png"
-            type="image/x-icon"
-          />
+          />{' '}
         </Head>
+
         <body>
           <Main />
           <NextScript />

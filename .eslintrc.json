@@ -16,30 +16,24 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": "latest",
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
     "react",
-    "@typescript-eslint",
     "react-hooks",
-    "prettier",
-    "eslint-plugin-import-helpers"
+    "@typescript-eslint",
+    "prettier"
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
-    "no-unused-vars": "error",
-    "prefer-destructuring": "off",
-    "camelcase": "off",
-    "react/function-component-definition": "off",
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [
-          ".tsx",
-          ".ts"
+          ".tsx"
         ]
       }
     ],
@@ -57,35 +51,13 @@
     ],
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": [
-      "warn",
+      "error",
       {
         "endOfLine": "auto"
       }
     ],
-    "import-helpers/order-imports": [
-      "warn",
-      {
-        "newlinesBetween": "always",
-        "groups": [
-          "/^react/",
-          "module",
-          "/^@/",
-          [
-            "parent",
-            "sibling",
-            "index"
-          ]
-        ],
-        "alphabetize": {
-          "order": "asc",
-          "ignoreCase": true
-        }
-      }
-    ],
     "react/jsx-props-no-spreading": "off",
-    "no-console": "warn",
-    "@typescript-eslint/no-unused-vars": "off",
-    "react/prop-types": "off"
+    "no-console": "off"
   },
   "settings": {
     "import/resolver": {
