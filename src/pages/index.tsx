@@ -1,24 +1,18 @@
-import React from 'react'
-import Head from 'next/head'
+import React from 'react';
 
-import RocketseatLogo from '../assets/rocketseat.svg'
+import Head from 'next/head';
 
-import { Container } from '../styles/pages/Home'
-import { Button } from '@develop-fapp/ui-kit-fapp'
+import HomePageFactory from '../main/factories/Home';
 
 const Home: React.FC = () => {
   return (
-    <Container>
+    <>
       <Head>
-        <title>Homepage</title>
+        <title>Home</title>
       </Head>
+      <HomePageFactory />
+    </>
+  );
+};
 
-      <RocketseatLogo />
-      <h1>ReactJS Structure</h1>
-      <Button variant="contained">Teste</Button>
-      <p>A ReactJS + Next.js structure made by Rocketseat.</p>
-    </Container>
-  )
-}
-
-export default Home
+export default Home;
