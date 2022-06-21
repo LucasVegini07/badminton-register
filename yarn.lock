@@ -1009,16 +1009,14 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@develop-fapp/ui-kit-fapp@^0.1.65":
-  version "0.1.65"
-  resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.65.tgz#a46500bd3fc6c72ed49016ccc028a3ff0639f4a4"
-  integrity sha512-rmq6e+8B+X36LgmynGhD8LoazTwUxKU9OpBlVAtKZZGKVku2ew03klNoR/k4mxLYoJcVfMn+jigKIEMNaUnVBQ==
+"@develop-fapp/ui-kit-fapp@^0.1.69":
+  version "0.1.69"
+  resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.69.tgz#662d717e4505a1f015a9062e4a4d902f5f9f0fd2"
+  integrity sha512-qcaTwWFUJaMwHR/2BteR63P3YlXKGhW5jsL25dBvtimmSvo9Ir61Ehfm/3wRQBtVo59kY8AdvhdMlpYF51zfbw==
   dependencies:
     framer-motion "^4.1.17"
     iconsax-react "^0.0.8"
     prism-react-renderer "^1.2.1"
-    react "^17.0.2"
-    react-dom "^17.0.2"
     react-select "^5.2.1"
     styled-components "^5.3.3"
     web-vitals "^2.1.2"
@@ -5622,7 +5620,7 @@ raw-body@2.4.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-dom@17.0.2, react-dom@^17.0.2:
+react-dom@17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -5677,7 +5675,7 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@17.0.2, react@^17.0.2:
+react@17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==

@@ -32,6 +32,11 @@ const HomePage = ({ children }: Props) => {
       path: '/federacao/competicoes',
       icon: <Briefcase />,
     },
+    {
+      title: 'Categorias',
+      path: '/federacao/categorias',
+      icon: <Briefcase />,
+    },
   ];
 
   return (
