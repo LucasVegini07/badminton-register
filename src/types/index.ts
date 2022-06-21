@@ -20,4 +20,5 @@ export interface SidebarProps {
 export interface SidebarStatus extends SidebarProps {
   open: boolean;
   setOpen?: () => void;
+  title?: string;
 }
