@@ -53,6 +53,7 @@ const HomePage = ({ children }: Props) => {
         onClick={showSidebar}
         open={sidebar}
         setOpen={showSidebar}
+        title="Clube"
       />
       <MainComponent open={sidebar}>{children}</MainComponent>
     </>

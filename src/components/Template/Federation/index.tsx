@@ -1,12 +1,10 @@
 import React, { ReactNode, useState } from 'react';
 import { Home, Command, Briefcase } from 'iconsax-react';
-import {
-  Container,
-  MainComponent,
-  Navbar,
-  Sidebar,
-  Text,
-} from '@develop-fapp/ui-kit-fapp';
+import { Container, Text } from '@develop-fapp/ui-kit-fapp';
+
+import { Sidebar } from '../../Sidebar/Sidebar';
+import { MainComponent } from '../../Sidebar/Main';
+import { Navbar } from '../../Sidebar/Navbar';
 
 interface Props {
   children: ReactNode;
@@ -51,6 +49,7 @@ const HomePage = ({ children }: Props) => {
         </Container>
       </Navbar>
       <Sidebar
+        title="Federação"
         items={SidebarData}
         onClick={showSidebar}
         open={sidebar}
