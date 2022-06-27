@@ -1009,10 +1009,10 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@develop-fapp/ui-kit-fapp@^0.1.69":
-  version "0.1.69"
-  resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.69.tgz#662d717e4505a1f015a9062e4a4d902f5f9f0fd2"
-  integrity sha512-qcaTwWFUJaMwHR/2BteR63P3YlXKGhW5jsL25dBvtimmSvo9Ir61Ehfm/3wRQBtVo59kY8AdvhdMlpYF51zfbw==
+"@develop-fapp/ui-kit-fapp@^0.1.71":
+  version "0.1.70"
+  resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.70.tgz#8d1c30b2521d5463bbdda3ab886cc9ef6e97fce8"
+  integrity sha512-LLPrfYtBGxr7DJpaOYgUeVgwSEYEmuXTn3Ygpme3IlzV/PxgQpcpMQ/web35NBaYEEBBVaa4WDNdr+z+mDNeHQ==
   dependencies:
     framer-motion "^4.1.17"
     iconsax-react "^0.0.8"

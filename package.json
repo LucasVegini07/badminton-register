@@ -18,7 +18,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "styled-components": "^5.3.3",
-    "@develop-fapp/ui-kit-fapp": "^0.1.69",
+    "@develop-fapp/ui-kit-fapp": "^0.1.70",
     "iconsax-react": "^0.0.8",
     "react-drag-drop-files": "^2.3.7"
   },

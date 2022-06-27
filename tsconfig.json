@@ -24,6 +24,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Federation/Club/Modal/delete.js", "src/components/Federation/Club/Modal/edit.js"],
   "exclude": ["node_modules", "dist", "coverage", ".next"]
 }

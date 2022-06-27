@@ -9,8 +9,6 @@ function DragDrop() {
     setFile(choseFile);
   };
 
-  console.log(file);
-
   return (
     <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
   );
