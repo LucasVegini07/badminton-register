@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import { Home, Command, Briefcase } from 'iconsax-react';
+import { Home, Command, Briefcase, MoreSquare } from 'iconsax-react';
 import { Container, Text } from '@develop-fapp/ui-kit-fapp';
 
 import { Sidebar } from '../../Sidebar/Sidebar';
@@ -23,11 +23,6 @@ const HomePage = ({ children }: Props) => {
       icon: <Home />,
     },
     {
-      title: 'Clubes',
-      path: '/federacao/clubes',
-      icon: <Command />,
-    },
-    {
       title: 'Competições',
       path: '/federacao/competicoes',
       icon: <Briefcase />,
@@ -35,7 +30,12 @@ const HomePage = ({ children }: Props) => {
     {
       title: 'Categorias',
       path: '/federacao/categorias',
-      icon: <Briefcase />,
+      icon: <MoreSquare />,
+    },
+    {
+      title: 'Clubes',
+      path: '/federacao/clubes',
+      icon: <Command />,
     },
   ];
 

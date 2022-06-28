@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { Edit2, Trash, MoreSquare } from 'iconsax-react';
 import { Container, Button, Text } from '@develop-fapp/ui-kit-fapp';
-import { Edit2, Trash, Lock } from 'iconsax-react';
-import CreateModal from '@components/Federation/Club/Modal/create';
-import EditModal from '@components/Federation/Club/Modal/edit';
-import DeleteModal from '@components/Federation/Club/Modal/delete';
-import RepresentantModal from '@components/Federation/Club/Modal/Represent';
-
+import CreateModal from '@components/Federation/Competition/Modal/create';
+import EditModal from '@components/Federation/Competition/Modal/edit';
+import DeleteModal from '@components/Federation/Competition/Modal/delete';
+import CategoryModal from '@components/Federation/Competition/Modal/Category/index';
 import axios from 'axios';
 import Template from '../../components/Template/Federation';
+import { DataFromBackend } from '~/shared/utils/utils';
 
-const HomePage = () => {
+const Competitions = () => {
   const [open, setOpen] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openRepresentantModal, setOpenRepresentantModal] = useState(false);
+  const [openCategoryModal, setOpenCategoryModal] = useState(false);
 
-  const [clubes, setClubes] = useState([]);
+  const [selectedCompetition, setSelectedCompetition] = useState({
+    nome: '',
+    data_inicio: '',
+    data_fim: '',
+    data_prazo_inscricoes: '',
+  });
 
-  const [selectedClub, setSelectedClub] = useState({});
+  const [competitions, setCompetitions] = useState([]);
 
   useEffect(() => {
-    updatClubs();
+    updatCompetitions();
   }, []);
 
-  const updatClubs = () => {
+  const updatCompetitions = () => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}/clubes`, {})
-      .then(response => setClubes(response.data));
+      .get(`${process.env.NEXT_PUBLIC_URL}/competicao`, {})
+      .then(response => setCompetitions(response.data));
   };
 
   return (
@@ -38,20 +43,20 @@ const HomePage = () => {
           style={{ marginBottom: '32px' }}
         >
           <Text variant="h4" weight="bold">
-            Clubes
+            Competições
           </Text>
           <Button variant="contained" onClick={() => setOpen(true)}>
-            Cadastrar novo clube
+            Cadastrar novo competição
           </Button>
         </Container>
 
-        {clubes.length === 0 ? (
+        {competitions.length === 0 ? (
           <Text variant="h4" style={{ textAlign: 'center', marginTop: '64px' }}>
-            Você ainda não cadastrou nenhum clube
+            Você ainda não cadastrou nenhuma competição
           </Text>
         ) : (
           <>
-            {clubes.map(clube => {
+            {competitions.map(competicao => {
               return (
                 <Container
                   container="fluid"
@@ -63,7 +68,7 @@ const HomePage = () => {
                     padding: '8px',
                     marginBottom: '16px',
                   }}
-                  key={clube.cnpj}
+                  key={competicao.nome}
                 >
                   <Container flexDirection="column">
                     <Text
@@ -73,7 +78,7 @@ const HomePage = () => {
                       Nome
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.nome}
+                      {competicao.nome}
                     </Text>
                   </Container>
                   <Container flexDirection="column">
@@ -81,10 +86,10 @@ const HomePage = () => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      Sigla
+                      Data início
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.sigla}
+                      {DataFromBackend(competicao.dataInicio)}
                     </Text>
                   </Container>
                   <Container flexDirection="column">
@@ -92,10 +97,10 @@ const HomePage = () => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      Cidade
+                      Data fim
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.cidade}
+                      {DataFromBackend(competicao.dataFim)}
                     </Text>
                   </Container>
                   <Container flexDirection="column">
@@ -103,30 +108,30 @@ const HomePage = () => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      CNPJ
+                      Data prazo inscrições
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.cnpj}
+                      {DataFromBackend(competicao.dataPrazoInscricoes)}
                     </Text>
                   </Container>
                   <Container justifyContent="center">
-                    <Lock
+                    <MoreSquare
                       style={{ marginRight: '12px' }}
                       onClick={() => {
-                        setSelectedClub(clube);
-                        setOpenRepresentantModal(true);
+                        setSelectedCompetition(competicao);
+                        setOpenCategoryModal(true);
                       }}
                     />
                     <Edit2
                       style={{ marginRight: '12px' }}
                       onClick={() => {
-                        setSelectedClub(clube);
+                        setSelectedCompetition(competicao);
                         setOpenEditModal(true);
                       }}
                     />
                     <Trash
                       onClick={() => {
-                        setSelectedClub(clube);
+                        setSelectedCompetition(competicao);
                         setOpenDeleteModal(true);
                       }}
                     />
@@ -137,33 +142,38 @@ const HomePage = () => {
           </>
         )}
       </Container>
+
       <CreateModal
         open={open}
         onClose={() => setOpen(false)}
-        updatClubs={updatClubs}
+        updatCompetitions={updatCompetitions}
       />
-      <EditModal
-        open={openEditModal}
-        onClose={() => setOpenEditModal(false)}
-        updatClubs={updatClubs}
-        selectedClub={selectedClub}
-        setSelectedClub={setSelectedClub}
-      />
+      {openEditModal && (
+        <EditModal
+          open={openEditModal}
+          onClose={() => setOpenEditModal(false)}
+          updatCompetitions={updatCompetitions}
+          selectedCompetition={selectedCompetition}
+          setSelectedCompetition={setSelectedCompetition}
+        />
+      )}
       <DeleteModal
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
-        updatClubs={updatClubs}
-        selectedClub={selectedClub}
+        updatCompetitions={updatCompetitions}
+        selectedCompetition={selectedCompetition}
       />
-      {openRepresentantModal && (
-        <RepresentantModal
-          open={openRepresentantModal}
-          onClose={() => setOpenRepresentantModal(false)}
-          selectedClub={selectedClub}
+
+      {openCategoryModal && (
+        <CategoryModal
+          open={openCategoryModal}
+          onClose={() => setOpenCategoryModal(false)}
+          updatCompetitions={updatCompetitions}
+          selectedCompetition={selectedCompetition}
         />
       )}
     </Template>
   );
 };
 
-export default HomePage;
+export default Competitions;

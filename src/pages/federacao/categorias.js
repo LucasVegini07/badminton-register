@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button, Text } from '@develop-fapp/ui-kit-fapp';
-import { Edit2, Trash, Lock } from 'iconsax-react';
-import CreateModal from '@components/Federation/Club/Modal/create';
-import EditModal from '@components/Federation/Club/Modal/edit';
-import DeleteModal from '@components/Federation/Club/Modal/delete';
-import RepresentantModal from '@components/Federation/Club/Modal/Represent';
+import { Edit2, Trash } from 'iconsax-react';
+import CreateModal from '@components/Federation/Category/Modal/create';
+import EditModal from '@components/Federation/Category/Modal/edit';
+import DeleteModal from '@components/Federation/Category/Modal/delete';
 
 import axios from 'axios';
 import Template from '../../components/Template/Federation';
 
-const HomePage = () => {
+const CategoryPage = () => {
   const [open, setOpen] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openRepresentantModal, setOpenRepresentantModal] = useState(false);
-
-  const [clubes, setClubes] = useState([]);
-
-  const [selectedClub, setSelectedClub] = useState({});
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState({});
 
   useEffect(() => {
-    updatClubs();
+    updatCategory();
   }, []);
 
-  const updatClubs = () => {
+  const updatCategory = () => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_URL}/clubes`, {})
-      .then(response => setClubes(response.data));
+      .get(`${process.env.NEXT_PUBLIC_URL}/categoria`, {})
+      .then(response => setCategories(response.data));
   };
 
   return (
@@ -38,20 +34,20 @@ const HomePage = () => {
           style={{ marginBottom: '32px' }}
         >
           <Text variant="h4" weight="bold">
-            Clubes
+            Categoria
           </Text>
           <Button variant="contained" onClick={() => setOpen(true)}>
-            Cadastrar novo clube
+            Cadastrar nova categoria
           </Button>
         </Container>
 
-        {clubes.length === 0 ? (
+        {categories.length === 0 ? (
           <Text variant="h4" style={{ textAlign: 'center', marginTop: '64px' }}>
-            Você ainda não cadastrou nenhum clube
+            Você ainda não cadastrou nenhuma categoria
           </Text>
         ) : (
           <>
-            {clubes.map(clube => {
+            {categories.map(categoria => {
               return (
                 <Container
                   container="fluid"
@@ -63,7 +59,7 @@ const HomePage = () => {
                     padding: '8px',
                     marginBottom: '16px',
                   }}
-                  key={clube.cnpj}
+                  key={categoria.cnpj}
                 >
                   <Container flexDirection="column">
                     <Text
@@ -73,7 +69,29 @@ const HomePage = () => {
                       Nome
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.nome}
+                      {categoria.nome}
+                    </Text>
+                  </Container>
+                  {/* <Container flexDirection="column">
+                    <Text
+                      weight="bold"
+                      style={{ textAlign: 'center', marginBottom: '8px' }}
+                    >
+                      Descrição
+                    </Text>
+                    <Text variant="h6" style={{ textAlign: 'center' }}>
+                      {categoria.descricao}
+                    </Text>
+                  </Container> */}
+                  <Container flexDirection="column">
+                    <Text
+                      weight="bold"
+                      style={{ textAlign: 'center', marginBottom: '8px' }}
+                    >
+                      Idade mínima
+                    </Text>
+                    <Text variant="h6" style={{ textAlign: 'center' }}>
+                      {categoria.idadeMin}
                     </Text>
                   </Container>
                   <Container flexDirection="column">
@@ -81,10 +99,10 @@ const HomePage = () => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      Sigla
+                      Idade Máxima
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.sigla}
+                      {categoria.idadeMax}
                     </Text>
                   </Container>
                   <Container flexDirection="column">
@@ -92,41 +110,23 @@ const HomePage = () => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      Cidade
+                      Dupla
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.cidade}
-                    </Text>
-                  </Container>
-                  <Container flexDirection="column">
-                    <Text
-                      weight="bold"
-                      style={{ textAlign: 'center', marginBottom: '8px' }}
-                    >
-                      CNPJ
-                    </Text>
-                    <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {clube.cnpj}
+                      {categoria.isDupla ? 'Sim' : 'Não'}
                     </Text>
                   </Container>
                   <Container justifyContent="center">
-                    <Lock
-                      style={{ marginRight: '12px' }}
-                      onClick={() => {
-                        setSelectedClub(clube);
-                        setOpenRepresentantModal(true);
-                      }}
-                    />
                     <Edit2
                       style={{ marginRight: '12px' }}
                       onClick={() => {
-                        setSelectedClub(clube);
+                        setSelectedCategory(categoria);
                         setOpenEditModal(true);
                       }}
                     />
                     <Trash
                       onClick={() => {
-                        setSelectedClub(clube);
+                        setSelectedCategory(categoria);
                         setOpenDeleteModal(true);
                       }}
                     />
@@ -140,30 +140,23 @@ const HomePage = () => {
       <CreateModal
         open={open}
         onClose={() => setOpen(false)}
-        updatClubs={updatClubs}
+        updatCategory={updatCategory}
       />
       <EditModal
         open={openEditModal}
         onClose={() => setOpenEditModal(false)}
-        updatClubs={updatClubs}
-        selectedClub={selectedClub}
-        setSelectedClub={setSelectedClub}
+        updatCategory={updatCategory}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
       <DeleteModal
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
-        updatClubs={updatClubs}
-        selectedClub={selectedClub}
+        updatCategory={updatCategory}
+        selectedCategory={selectedCategory}
       />
-      {openRepresentantModal && (
-        <RepresentantModal
-          open={openRepresentantModal}
-          onClose={() => setOpenRepresentantModal(false)}
-          selectedClub={selectedClub}
-        />
-      )}
     </Template>
   );
 };
 
-export default HomePage;
+export default CategoryPage;

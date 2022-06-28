@@ -1009,7 +1009,7 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@develop-fapp/ui-kit-fapp@^0.1.71":
+"@develop-fapp/ui-kit-fapp@^0.1.70":
   version "0.1.70"
   resolved "https://registry.yarnpkg.com/@develop-fapp/ui-kit-fapp/-/ui-kit-fapp-0.1.70.tgz#8d1c30b2521d5463bbdda3ab886cc9ef6e97fce8"
   integrity sha512-LLPrfYtBGxr7DJpaOYgUeVgwSEYEmuXTn3Ygpme3IlzV/PxgQpcpMQ/web35NBaYEEBBVaa4WDNdr+z+mDNeHQ==
