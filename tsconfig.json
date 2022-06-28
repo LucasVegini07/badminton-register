@@ -24,6 +24,16 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Federation/Club/Modal/delete.js", "src/components/Federation/Club/Modal/edit.js", "src/pages/federacao/categorias.js", "src/pages/federacao/competicoes.js", "src/shared/utils/utils.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/Federation/Club/Modal/delete.js",
+    "src/components/Federation/Club/Modal/edit.js",
+    "src/pages/federacao/categorias.js",
+    "src/pages/federacao/competicoes.js",
+    "src/shared/utils/utils.js",
+    "src/pages/index.js"
+  ],
   "exclude": ["node_modules", "dist", "coverage", ".next"]
 }
