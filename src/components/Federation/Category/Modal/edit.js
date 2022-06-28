@@ -72,7 +72,7 @@ const createModal = ({
         flexDirection="column"
         style={{ padding: '20px', width: '50vh' }}
       >
-        <Text weight="bold">Adicione uma nova categoria</Text>
+        <Text weight="bold">Editar categoria</Text>
         <Divider style={{ margin: '16px 0px' }} />
         <Input
           style={{ marginBottom: '16px' }}

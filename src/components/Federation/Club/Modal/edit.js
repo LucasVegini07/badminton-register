@@ -62,7 +62,7 @@ const createModal = ({
         flexDirection="column"
         style={{ padding: '20px', width: '40vh' }}
       >
-        <Text weight="bold">Adicione um novo clube</Text>
+        <Text weight="bold">Editar clube</Text>
         <Divider style={{ margin: '16px 0px' }} />
         <Input
           style={{ marginBottom: '16px' }}
