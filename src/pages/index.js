@@ -18,7 +18,7 @@ export default function Home() {
 
   const handleLogin = async () => {
     if (username === 'admin' && senha === 'admin') {
-      router.push('/federacao');
+      return router.push('/federacao');
     }
 
     try {
