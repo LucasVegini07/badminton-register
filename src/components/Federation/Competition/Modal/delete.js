@@ -42,7 +42,7 @@ const deleteModal = ({
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '50vh' }}
+        style={{ padding: '20px' }}
       >
         <Text weight="bold">Quer excluir esta competição? </Text>
 

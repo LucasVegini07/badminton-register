@@ -12,35 +12,35 @@ import {
 
 import { useGeneralContext } from '~/context/GeneralContext';
 
-const deleteModal = ({ open, onClose, updatCategory, selectedCategory }) => {
+const deleteModal = ({ open, onClose, updatAtlhetes, selectedAthlete }) => {
   const { setErrorMessage, setSuccessMessage } = useGeneralContext();
 
   const content = () => {
     const DeleteCategory = async () => {
       try {
         await axios.delete(
-          `${process.env.NEXT_PUBLIC_URL}/categoria/${selectedCategory.id}`,
+          `${process.env.NEXT_PUBLIC_URL}/atletas/${selectedAthlete.id}`,
           {
             headers: { 'Access-Control-Allow-Origin': '*' },
           },
         );
 
-        updatCategory();
+        updatAtlhetes();
         onClose();
 
-        return setSuccessMessage('Categoria deletada com sucesso');
+        return setSuccessMessage('Atleta deletado com sucesso');
       } catch (e) {
         return setErrorMessage('O serviço não conseguiu se conectar na api');
       }
     };
 
     return (
-      <Container flexDirection="column" style={{ padding: '20px'}}>
-        <Text weight="bold">Quer excluir esta categoria? </Text>
+      <Container flexDirection="column" style={{ padding: '20px' }}>
+        <Text weight="bold">Quer excluir este atleta? </Text>
 
         <Text variant="h7" style={{ margin: '16px 0px' }}>
-          Ao confirmar, {selectedCategory.nome} não estará mais disponível na
-          sua lista de categorias salvas na sua conta
+          Ao confirmar, {selectedAthlete.nome} não estará mais disponível na sua
+          lista de atletas salvas na sua conta
         </Text>
 
         <Grid xs="1fr 1fr" spacing="16px">
@@ -48,7 +48,7 @@ const deleteModal = ({ open, onClose, updatCategory, selectedCategory }) => {
             Cancelar
           </Button>
           <Button variant="contained" color="error" onClick={DeleteCategory}>
-            Excluir categoria
+            Excluir atleta
           </Button>
         </Grid>
       </Container>

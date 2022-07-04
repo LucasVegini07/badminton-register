@@ -56,7 +56,7 @@ const createModal = ({ open, onClose, selectedClub, updatRepresentants }) => {
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '40vh' }}
+        style={{ padding: '20px' }}
       >
         <Text weight="bold">Adicione um novo representante</Text>
         <Divider style={{ margin: '16px 0px' }} />

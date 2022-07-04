@@ -74,7 +74,7 @@ const createModal = ({ open, onClose, updatCompetitions }) => {
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '50vh' }}
+        style={{ padding: '20px'}}
       >
         <Text weight="bold">Adicione uma nova categoria</Text>
         <Divider style={{ margin: '16px 0px' }} />

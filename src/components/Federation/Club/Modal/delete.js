@@ -37,7 +37,7 @@ const deleteModal = ({ open, onClose, updatClubs, selectedClub }) => {
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '40vh' }}
+        style={{ padding: '20px'}}
       >
         <Text weight="bold">Quer excluir este clube? </Text>
 

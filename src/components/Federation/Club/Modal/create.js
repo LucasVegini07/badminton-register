@@ -63,7 +63,7 @@ const createModal = ({ open, onClose, updatClubs }) => {
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '40vh' }}
+        style={{ padding: '20px' }}
       >
         <Text weight="bold">Adicione um novo clube</Text>
         <Divider style={{ margin: '16px 0px' }} />

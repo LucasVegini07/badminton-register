@@ -37,10 +37,7 @@ const deleteModal = ({
     };
 
     return (
-      <Container
-        flexDirection="column"
-        style={{ padding: '20px', width: '40vh' }}
-      >
+      <Container flexDirection="column" style={{ padding: '20px' }}>
         <Text weight="bold">Quer excluir este representante? </Text>
 
         <Text variant="h7" style={{ margin: '16px 0px' }}>

@@ -29,7 +29,6 @@ export default function Home() {
           headers: { 'Access-Control-Allow-Origin': '*' },
         },
       );
-
       return router.push(`/clube/${response.data.clubeId}`);
     } catch (e) {
       return setErrorMessage('Usuário e/ou senha inválidos');

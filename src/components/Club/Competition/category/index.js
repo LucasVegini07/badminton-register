@@ -7,17 +7,13 @@ import {
   Modal,
   Grid,
 } from '@develop-fapp/ui-kit-fapp';
-import CreateModal from '@components/Federation/Competition/Modal/Category/create';
-import DeleteModal from '@components/Federation/Competition/Modal/Category/delete';
-import { Edit2, Trash } from 'iconsax-react';
-
-import { useGeneralContext } from '~/context/GeneralContext';
+import { Add, Document } from 'iconsax-react';
+import AddAthlete from './addAtlhete';
+import RegistredAthletes from './registredAthletes';
 
 const representantModal = ({ open, onClose, selectedCompetition }) => {
-  const { setErrorMessage, setSuccessMessage } = useGeneralContext();
-
-  const [openCreate, setOpenCreate] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openRegistredAthletes, setOpenRegistredAthletes] = useState(false);
+  const [openAddAthlete, setOpenAddAthlete] = useState(false);
 
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState({});
@@ -36,10 +32,7 @@ const representantModal = ({ open, onClose, selectedCompetition }) => {
 
   const content = () => {
     return (
-      <Container
-        flexDirection="column"
-        style={{ padding: '20px' }}
-      >
+      <Container flexDirection="column" style={{ padding: '20px' }}>
         <Text weight="bold" style={{ marginBottom: '16px' }}>
           Categorias da competição: {selectedCompetition.nome}
         </Text>
@@ -90,10 +83,17 @@ const representantModal = ({ open, onClose, selectedCompetition }) => {
                     </Text>
                   </Container>
                   <Container justifyContent="center">
-                    <Trash
+                    <Add
+                      style={{ marginRight: '12px' }}
                       onClick={() => {
                         setSelectedCategory(categoria);
-                        setOpenDeleteModal(true);
+                        setOpenAddAthlete(true);
+                      }}
+                    />
+                    <Document
+                      onClick={() => {
+                        setSelectedCategory(categoria);
+                        setOpenRegistredAthletes(true);
                       }}
                     />
                   </Container>
@@ -102,28 +102,20 @@ const representantModal = ({ open, onClose, selectedCompetition }) => {
             })}
           </>
         )}
-
-        <Grid xs="1fr" spacing="16px">
-          <Button variant="contained" onClick={() => setOpenCreate(true)}>
-            Cadastrar nova categoria
-          </Button>
-        </Grid>
-
-        {openCreate && (
-          <CreateModal
-            open={openCreate}
-            onClose={() => setOpenCreate(false)}
-            selectedCompetition={selectedCompetition}
-            updatCategories={updatCategories}
-          />
-        )}
-        <DeleteModal
-          open={openDeleteModal}
-          onClose={() => setOpenDeleteModal(false)}
+        <AddAthlete
+          open={openAddAthlete}
+          onClose={() => setOpenAddAthlete(false)}
           selectedCompetition={selectedCompetition}
-          updatCategories={updatCategories}
           selectedCategory={selectedCategory}
         />
+        {openRegistredAthletes && (
+          <RegistredAthletes
+            open={openRegistredAthletes}
+            onClose={() => setOpenRegistredAthletes(false)}
+            selectedCompetition={selectedCompetition}
+            selectedCategory={selectedCategory}
+          />
+        )}
       </Container>
     );
   };

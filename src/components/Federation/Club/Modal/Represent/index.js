@@ -38,7 +38,7 @@ const representantModal = ({ open, onClose, selectedClub }) => {
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '60vh' }}
+        style={{ padding: '20px'}}
       >
         <Text weight="bold" style={{ marginBottom: '16px' }}>
           Representantes do(a) {selectedClub.nome}
