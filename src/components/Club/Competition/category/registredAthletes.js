@@ -31,7 +31,7 @@ const addAthelteModal = ({
     return (
       <Container flexDirection="column" style={{ padding: '20px' }}>
         <Text weight="bold" style={{ marginBottom: '16px' }}>
-          Atletas cadastrados na categoria : {selectedCategory.name}
+          Atletas cadastrados na categoria : {selectedCategory.nome}
         </Text>
 
         {athletes.map(atleta => {

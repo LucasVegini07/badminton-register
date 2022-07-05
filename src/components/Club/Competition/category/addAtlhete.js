@@ -9,7 +9,6 @@ import {
   ComboBoxSingleSelect,
 } from '@develop-fapp/ui-kit-fapp';
 
-import { useRouter } from 'next/router';
 import { useGeneralContext } from '~/context/GeneralContext';
 import { DataFromBackend } from '~/shared/utils/utils';
 
@@ -23,17 +22,20 @@ const addAthelteModal = ({
   const [options, setOptions] = useState([]);
   const [athlete, setAthlete] = useState({});
   const [athletes, setAthletes] = useState([]);
-  const router = useRouter();
-  const [categoryInformation, setCategoryInformation] = useState({});
 
   useEffect(() => {
     getAthletes();
-  }, [router.query.id]);
+  }, []);
 
   const getAthletes = () => {
-    if (router.query.id) {
+    if (localStorage.getItem('clubeId')) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_URL}/atletas/${router.query.id}`, {})
+        .get(
+          `${process.env.NEXT_PUBLIC_URL}/atletas/${localStorage.getItem(
+            'clubeId',
+          )}`,
+          {},
+        )
         .then(response => {
           setAthletes(response.data);
 

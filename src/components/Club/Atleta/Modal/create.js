@@ -54,7 +54,7 @@ const createModal = ({ open, onClose, updatAtlhetes }) => {
       const newAtlhete = { ...atlhete };
 
       newAtlhete.sexo = sexoInformation.value;
-      newAtlhete.clubeId = router.query.id;
+      newAtlhete.clubeId = localStorage.getItem('clubeId');
       newAtlhete.dataNascimento = DataForBackend(newAtlhete.dataNascimento);
       newAtlhete.foto = 'ramon.png';
 

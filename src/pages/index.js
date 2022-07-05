@@ -29,7 +29,10 @@ export default function Home() {
           headers: { 'Access-Control-Allow-Origin': '*' },
         },
       );
-      return router.push(`/clube/${response.data.clubeId}`);
+
+      localStorage.setItem('clubeId', response.data.clubeId);
+
+      return router.push(`/clube`);
     } catch (e) {
       return setErrorMessage('Usuário e/ou senha inválidos');
     }

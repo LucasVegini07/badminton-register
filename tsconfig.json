@@ -34,6 +34,6 @@
     "src/pages/federacao/competicoes.js",
     "src/shared/utils/utils.js",
     "src/pages/index.js"
-, "src/pages/clube/[id]/atletas.js", "src/pages/clube/[id]/competicoes.js"  ],
+, "src/pages/atletas.js", "src/pages/clube/[slug]/competicoes.js"  ],
   "exclude": ["node_modules", "dist", "coverage", ".next"]
 }

@@ -1,8 +1,10 @@
 import { Container, Text } from '@develop-fapp/ui-kit-fapp';
 import React from 'react';
-import Template from '../../../components/Template/Club';
+import Template from '../../components/Template/Club';
 
 const HomePage = () => {
+  console.log(localStorage.getItem('clubeId'));
+
   return (
     <Template>
       <Container container="fluid">

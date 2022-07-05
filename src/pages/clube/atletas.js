@@ -4,13 +4,11 @@ import { Edit2, Trash } from 'iconsax-react';
 import CreateModal from '@components/Club/Atleta/Modal/create';
 import EditModal from '@components/Club/Atleta/Modal/edit';
 import DeleteModal from '@components/Club/Atleta/Modal/delete';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 import Template from '@components/Template/Club';
 import { DataFromBackend } from '~/shared/utils/utils';
 
 const CategoryPage = () => {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -19,12 +17,16 @@ const CategoryPage = () => {
 
   useEffect(() => {
     updatAtlhetes();
-  }, [router.query.id]);
+  }, []);
 
   const updatAtlhetes = () => {
-    if (router.query.id)
+    if (localStorage.getItem('clubeId'))
       axios
-        .get(`${process.env.NEXT_PUBLIC_URL}/atletas/${router.query.id}`)
+        .get(
+          `${process.env.NEXT_PUBLIC_URL}/atletas/${localStorage.getItem(
+            'clubeId',
+          )}`,
+        )
         .then(response => setAthletes(response.data));
   };
 

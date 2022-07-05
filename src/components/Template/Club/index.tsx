@@ -1,7 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import { Home, Command, Profile2User } from 'iconsax-react';
 import { Container, Text } from '@develop-fapp/ui-kit-fapp';
-import { useRouter } from 'next/router';
 
 import { Sidebar } from '../../Sidebar/Sidebar';
 import { MainComponent } from '../../Sidebar/Main';
@@ -12,29 +11,25 @@ interface Props {
 }
 
 const HomePage = ({ children }: Props) => {
-  const router = useRouter();
-
   const [sidebar, setSidebar] = useState<boolean>(false);
   const showSidebar = () => {
     setSidebar(!sidebar);
   };
 
-  const { id } = router.query;
-
   const SidebarData = [
     {
       title: 'Home',
-      path: `/clube/${id}`,
+      path: `/clube`,
       icon: <Home />,
     },
     {
       title: 'Atletas',
-      path: `/clube/${id}/atletas`,
+      path: `/clube/atletas`,
       icon: <Profile2User />,
     },
     {
       title: 'Competições',
-      path: `/clube/${id}/competicoes`,
+      path: `/clube/competicoes`,
       icon: <Command />,
     },
   ];
