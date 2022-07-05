@@ -50,7 +50,7 @@ const CategoryPage = () => {
           </Text>
         ) : (
           <>
-            {athletes.map((atleta, index) => {
+            {athletes.map(atleta => {
               return (
                 <Container
                   container="fluid"
@@ -62,7 +62,7 @@ const CategoryPage = () => {
                     padding: '8px',
                     marginBottom: '16px',
                   }}
-                  key={index}
+                  key={atleta.id}
                 >
                   <Container flexDirection="column">
                     <Text

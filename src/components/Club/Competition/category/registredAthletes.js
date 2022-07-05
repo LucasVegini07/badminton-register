@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  Container,
-  Button,
-  Text,
-  Modal,
-  Grid,
-} from '@develop-fapp/ui-kit-fapp';
+import { Container, Text, Modal } from '@develop-fapp/ui-kit-fapp';
 
 import { DataFromBackend } from '~/shared/utils/utils';
 
@@ -40,7 +34,7 @@ const addAthelteModal = ({
           Atletas cadastrados na categoria : {selectedCategory.name}
         </Text>
 
-        {athletes.map((atleta, index) => {
+        {athletes.map(atleta => {
           return (
             <Container
               container="fluid"
@@ -52,7 +46,7 @@ const addAthelteModal = ({
                 padding: '8px',
                 marginBottom: '16px',
               }}
-              key={index}
+              key={atleta.id}
             >
               <Container flexDirection="column">
                 <Text
