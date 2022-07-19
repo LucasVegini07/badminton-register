@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Edit2, Trash, MoreSquare } from 'iconsax-react';
+import { Edit2, Trash, MoreSquare, FolderCloud } from 'iconsax-react';
 import { Container, Button, Text } from '@develop-fapp/ui-kit-fapp';
 import CreateModal from '@components/Federation/Competition/Modal/create';
 import EditModal from '@components/Federation/Competition/Modal/edit';
@@ -32,6 +32,21 @@ const Competitions = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_URL}/competicao`, {})
       .then(response => setCompetitions(response.data));
+  };
+
+  const handleDownload = id => {
+    axios({
+      url: `${process.env.NEXT_PUBLIC_URL}/competicao/${id}/xlsx`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.xls');
+      document.body.appendChild(link);
+      link.click();
+    });
   };
 
   return (
@@ -130,10 +145,14 @@ const Competitions = () => {
                       }}
                     />
                     <Trash
+                      style={{ marginRight: '12px' }}
                       onClick={() => {
                         setSelectedCompetition(competicao);
                         setOpenDeleteModal(true);
                       }}
+                    />
+                    <FolderCloud
+                      onClick={() => handleDownload(competicao.id)}
                     />
                   </Container>
                 </Container>
