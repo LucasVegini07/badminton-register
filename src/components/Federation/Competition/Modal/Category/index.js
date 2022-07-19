@@ -36,10 +36,7 @@ const representantModal = ({ open, onClose, selectedCompetition }) => {
 
   const content = () => {
     return (
-      <Container
-        flexDirection="column"
-        style={{ padding: '20px' }}
-      >
+      <Container flexDirection="column" style={{ padding: '20px' }}>
         <Text weight="bold" style={{ marginBottom: '16px' }}>
           Categorias da competição: {selectedCompetition.nome}
         </Text>
@@ -83,10 +80,10 @@ const representantModal = ({ open, onClose, selectedCompetition }) => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      Dupla
+                      Tipo
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {categoria.isDupla ? 'Sim' : 'Não'}
+                      {categoria.dupla}
                     </Text>
                   </Container>
                   <Container justifyContent="center">

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Profile2User } from 'iconsax-react';
+import { Profile2User, Add } from 'iconsax-react';
 import { Container, Text } from '@develop-fapp/ui-kit-fapp';
 import axios from 'axios';
 import CategoryModal from '../../components/Club/Competition/category';
 import Template from '../../components/Template/Club';
 import { DataFromBackend } from '~/shared/utils/utils';
+import AddAthelteModal from '../../components/Club/Competition/category/addAtlhete';
 
 const Competitions = () => {
   const [openRegisterAthlete, setOpenRegisterAthlete] = useState(false);
@@ -17,6 +18,7 @@ const Competitions = () => {
   });
 
   const [competitions, setCompetitions] = useState([]);
+  const [openAddAthlete, setOpenAddAthlete] = useState(false);
 
   useEffect(() => {
     updatCompetitions();
@@ -113,6 +115,13 @@ const Competitions = () => {
                         setOpenRegisterAthlete(true);
                       }}
                     />
+                    <Add
+                      style={{ marginRight: '12px' }}
+                      onClick={() => {
+                        setSelectedCompetition(competicao);
+                        setOpenAddAthlete(true);
+                      }}
+                    />
                   </Container>
                 </Container>
               );
@@ -127,6 +136,14 @@ const Competitions = () => {
           onClose={() => setOpenRegisterAthlete(false)}
           updatCompetitions={updatCompetitions}
           selectedCompetition={selectedCompetition}
+        />
+      )}
+
+      {openAddAthlete && (
+        <AddAthelteModal
+          open={openAddAthlete}
+          selectedCompetition={selectedCompetition}
+          onClose={() => setOpenAddAthlete(false)}
         />
       )}
     </Template>

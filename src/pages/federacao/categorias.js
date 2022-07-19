@@ -72,17 +72,6 @@ const CategoryPage = () => {
                       {categoria.nome}
                     </Text>
                   </Container>
-                  {/* <Container flexDirection="column">
-                    <Text
-                      weight="bold"
-                      style={{ textAlign: 'center', marginBottom: '8px' }}
-                    >
-                      Descrição
-                    </Text>
-                    <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {categoria.descricao}
-                    </Text>
-                  </Container> */}
                   <Container flexDirection="column">
                     <Text
                       weight="bold"
@@ -110,10 +99,10 @@ const CategoryPage = () => {
                       weight="bold"
                       style={{ textAlign: 'center', marginBottom: '8px' }}
                     >
-                      Dupla
+                      Tipo
                     </Text>
                     <Text variant="h6" style={{ textAlign: 'center' }}>
-                      {categoria.isDupla ? 'Sim' : 'Não'}
+                      {categoria.dupla}
                     </Text>
                   </Container>
                   <Container justifyContent="center">

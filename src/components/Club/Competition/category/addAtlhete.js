@@ -7,25 +7,111 @@ import {
   Modal,
   Grid,
   ComboBoxSingleSelect,
+  InputButton,
 } from '@develop-fapp/ui-kit-fapp';
 
 import { useGeneralContext } from '~/context/GeneralContext';
 import { DataFromBackend } from '~/shared/utils/utils';
 
-const addAthelteModal = ({
-  open,
-  onClose,
-  selectedCompetition,
-  selectedCategory,
-}) => {
+const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
   const { setErrorMessage, setSuccessMessage } = useGeneralContext();
-  const [options, setOptions] = useState([]);
   const [athlete, setAthlete] = useState({});
+  const [athlete2, setAthlete2] = useState({});
+  const [cpfAtlhete2, setCpfAtlhete2] = useState('');
+  const [category, setCategory] = useState({});
   const [athletes, setAthletes] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [allAthletes, setAllAthletes] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
+  const [isDupla, setIsDupla] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(false);
 
   useEffect(() => {
     getAthletes();
+    getCategories();
   }, []);
+
+  useEffect(() => {
+    if (allCategories.length > 0) {
+      setCpfAtlhete2('');
+
+      const categoria = allCategories.find(
+        categoryAux => categoryAux.id === category.value,
+      );
+
+      const newAtlhetes = [];
+
+      if (
+        categoria.dupla === 'Individual masculino' ||
+        categoria.dupla === 'Dupla masculina'
+      ) {
+        allAthletes.map(
+          athleteAux =>
+            athleteAux.sexo === 'M' &&
+            newAtlhetes.push({ value: athleteAux.id, label: athleteAux.nome }),
+        );
+      } else if (
+        categoria.dupla === 'Individual feminino' ||
+        categoria.dupla === 'Dupla feminina'
+      ) {
+        allAthletes.map(
+          athleteAux =>
+            athleteAux.sexo === 'F' &&
+            newAtlhetes.push({ value: athleteAux.id, label: athleteAux.nome }),
+        );
+
+        setAthlete({ value: newAtlhetes[0].id, label: newAtlhetes[0].nome });
+      } else {
+        console.log('3');
+
+        allAthletes.map(athleteAux =>
+          newAtlhetes.push({ value: athleteAux.id, label: athleteAux.nome }),
+        );
+      }
+
+      if (
+        categoria.dupla === 'Individual masculino' ||
+        categoria.dupla === 'Individual feminino'
+      ) {
+        setIsDupla(false);
+        setDisabledButton(false);
+      } else {
+        setIsDupla(true);
+        setDisabledButton(true);
+      }
+      setAthletes(newAtlhetes);
+      setAthlete(newAtlhetes[0]);
+    }
+  }, [category]);
+
+  const getCategories = () => {
+    if (selectedCompetition.id)
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_URL}/competicao/${selectedCompetition.id}/categoria`,
+        )
+        .then(response => {
+          const categoriesAux = [];
+
+          setAllCategories(response.data);
+
+          if (response.data.length > 0) {
+            setCategory({
+              value: response.data[0].id,
+              label: response.data[0].nome,
+            });
+
+            response.data.map(categorie =>
+              categoriesAux.push({
+                value: categorie.id,
+                label: categorie.nome,
+              }),
+            );
+
+            setCategories(categoriesAux);
+          }
+        });
+  };
 
   const getAthletes = () => {
     if (localStorage.getItem('clubeId')) {
@@ -37,7 +123,7 @@ const addAthelteModal = ({
           {},
         )
         .then(response => {
-          setAthletes(response.data);
+          setAllAthletes(response.data);
 
           if (response.data.length > 0) {
             setAthlete({
@@ -45,21 +131,35 @@ const addAthelteModal = ({
               label: response.data[0].nome,
             });
 
+            const athletesAux = [];
+
             response.data.map(categorie =>
-              options.push({ value: categorie.id, label: categorie.nome }),
+              athletesAux.push({ value: categorie.id, label: categorie.nome }),
             );
+
+            setAthletes(athletesAux);
           }
-          setOptions(options);
         });
     }
   };
 
   const content = () => {
     const AddAthlete = async () => {
-      const atleta = {
-        idCategoria: selectedCategory.id,
-        idAtleta: athlete.value,
-      };
+      let atleta = {};
+
+      if (isDupla)
+        atleta = {
+          idCategoria: category.value,
+          idAtleta: athlete.value,
+          idAtleta2: athlete2.id,
+        };
+      else
+        atleta = {
+          idCategoria: category.value,
+          idAtleta: athlete.value,
+        };
+
+        console.log(atleta)
 
       try {
         await axios.post(
@@ -78,78 +178,109 @@ const addAthelteModal = ({
       }
     };
 
+    const validaCPF = () => {
+      try {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_URL}/atletas/cpf/${cpfAtlhete2}`)
+          // eslint-disable-next-line consistent-return
+          .then(response => {
+            if (!response.data) {
+              return setErrorMessage(
+                'Atleta não encontrado, verifique o CPF do atleta 2',
+              );
+            }
+
+            setAthlete2(response.data);
+
+            const atleta = allAthletes.find(
+              atheleteAux => atheleteAux.id === athlete.value,
+            );
+
+            const categoria = allCategories.find(
+              categoryAux => categoryAux.id === category.value,
+            );
+
+            if (categoria.dupla === 'Dupla mista')
+              return setSuccessMessage('Atleta adicionado com sucesso');
+
+            if (atleta.cpf === response.data.cpf) {
+              return setErrorMessage(
+                'Atleta 2 não pode ser o mesmo que o que o atleta 1',
+              );
+            }
+
+            if (atleta.sexo === response.data.sexo) {
+              setSuccessMessage('Atleta validado com sucesso ');
+              setDisabledButton(false);
+
+              console.log(athlete2);
+            } else {
+              setErrorMessage(
+                'O sexo do atleta informado não é compatível com a competição',
+              );
+            }
+          });
+      } catch (e) {
+        return setErrorMessage('O serviço não conseguiu se conectar na api');
+      }
+      return '';
+    };
+
     return (
       <Container flexDirection="column" style={{ padding: '20px' }}>
-        <Text weight="bold" style={{ marginBottom: '16px' }}>
-          Escolha um atleta
+        <Text style={{ marginBottom: '16px' }}>
+          Adicione um atleta na competição {selectedCompetition.nome}
         </Text>
 
         <ComboBoxSingleSelect
-          items={options}
-          onChange={setAthlete}
-          value={athlete}
-          placeholder="Atleta"
+          items={categories}
+          placeholder="Categoria"
+          style={{ marginBottom: '16px' }}
+          value={category}
+          onChange={setCategory}
         />
-        <div style={{ marginBottom: '16px' }} />
 
-        {athletes && athlete.value && (
-          <>
-            <Text variant="h7" style={{ marginBottom: '16px' }}>
-              <Text variant="h7" weight="bold">
-                Nome:
-              </Text>{' '}
-              {athletes.find(atleta => atleta.id === athlete.value).nome}
-            </Text>
-            <Text variant="h7" style={{ marginBottom: '16px' }}>
-              <Text variant="h7" weight="bold">
-                CPF:
-              </Text>{' '}
-              {athletes.find(atleta => atleta.id === athlete.value).cpf}
-            </Text>
-            <Text variant="h7" style={{ marginBottom: '16px' }}>
-              <Text variant="h7" weight="bold">
-                Identificação:
-              </Text>{' '}
-              {
-                athletes.find(atleta => atleta.id === athlete.value)
-                  .identificacao
-              }
-            </Text>
-            <Text variant="h7" style={{ marginBottom: '16px' }}>
-              <Text variant="h7" weight="bold">
-                Data de nascimento:
-              </Text>{' '}
-              {DataFromBackend(
-                athletes.find(atleta => atleta.id === athlete.value)
-                  .dataNascimento,
-              )}
-            </Text>
-          </>
+        <ComboBoxSingleSelect
+          items={athletes}
+          placeholder="Atleta"
+          style={{ marginBottom: '16px' }}
+          value={athlete}
+          onChange={setAthlete}
+        />
+
+        {isDupla && (
+          <InputButton
+            input={{
+              placeholder: 'Atleta 2 - CPF',
+              value: cpfAtlhete2,
+              onChange: e => setCpfAtlhete2(e.target.value),
+              mask: 'cpf',
+            }}
+            button={{
+              color: 'primary',
+              variant: 'contained',
+              children: 'Validar CPF',
+              onClick: () => validaCPF(),
+            }}
+          />
         )}
-        {/* <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            CPF
-          </Text>{' '}
-          {categoryInformation.idadeMin}{' '}
-        </Text>
-        <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            Sexo
-          </Text>{' '}
-          {categoryInformation.idadeMax}{' '}
-        </Text>
-        <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            Dupla:{' '}
-          </Text>{' '}
-          {categoryInformation.isDupla ? 'Sim' : 'Não'}{' '}
-        </Text> */}
 
+        <Container justifyContent="center">
+          <img
+            src="/athlete.png"
+            alt="athlete.png"
+            style={{ width: '200px', padding: '20px' }}
+          />
+        </Container>
         <Grid xs="1fr 1fr" spacing="16px">
           <Button variant="outlined" onClick={onClose}>
             Cancelar
           </Button>
-          <Button variant="contained" onClick={AddAthlete}>
+          <Button
+            disabled={disabledButton}
+            variant="contained"
+            onClick={AddAthlete}
+          >
             Adicionar
           </Button>
         </Grid>

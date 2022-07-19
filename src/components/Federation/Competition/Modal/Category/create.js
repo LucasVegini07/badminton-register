@@ -8,7 +8,7 @@ import {
   Input,
   Divider,
   Grid,
-  ComboBoxSingleSelect,
+  ComboBoxMultiSelect,
 } from '@develop-fapp/ui-kit-fapp';
 
 import { useGeneralContext } from '~/context/GeneralContext';
@@ -21,10 +21,12 @@ const createModal = ({
 }) => {
   const { setErrorMessage, setSuccessMessage } = useGeneralContext();
 
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState([]);
   const [categories, setCategories] = useState({});
   const [options, setOptions] = useState([]);
   const [categoryInformation, setCategoryInformation] = useState({});
+
+  console.log(category);
 
   useEffect(() => {
     if (category.value && options.length > 0) {
@@ -45,11 +47,6 @@ const createModal = ({
       setCategories(response.data);
 
       if (response.data.length > 0) {
-        setCategory({
-          value: response.data[0].id,
-          label: response.data[0].nome,
-        });
-
         response.data.map(categorie =>
           options.push({ value: categorie.id, label: categorie.nome }),
         );
@@ -60,13 +57,26 @@ const createModal = ({
 
   const content = () => {
     const create = async () => {
-      if (!category.value) {
-        return setErrorMessage('Campo categoria inválido');
+      if (category.length === 0) {
+        return setErrorMessage('Selecione pelo menos uma categoria');
       }
+
+      const idCategoria = [];
+
+      category.map(categorie => idCategoria.push(categorie.value));
+
+      const bodyFormData = new FormData();
+
+      idCategoria.forEach(item => {
+        bodyFormData.append('idCategoria', item);
+      });
+
+      const categorias = { idCategoria };
 
       try {
         await axios.post(
-          `${process.env.NEXT_PUBLIC_URL}/competicao/${selectedCompetition.id}/categoria/${category.value}`,
+          `${process.env.NEXT_PUBLIC_URL}/competicao/${selectedCompetition.id}/categoria`,
+          categorias,
           {
             headers: { 'Access-Control-Allow-Origin': '*' },
           },
@@ -83,44 +93,26 @@ const createModal = ({
     };
 
     return (
-      <Container
-        flexDirection="column"
-        style={{ padding: '20px'}}
-      >
-        <Text weight="bold">Adicione uma nova categoria</Text>
+      <Container flexDirection="column" style={{ padding: '20px' }}>
+        <Text weight="bold">
+          Selecione as novas categorias de {selectedCompetition.nome}
+        </Text>
         <Divider style={{ margin: '16px 0px' }} />
-        <ComboBoxSingleSelect
+        <ComboBoxMultiSelect
           items={options}
           onChange={setCategory}
           value={category}
           placeholder="Categorias"
+          style={{ marginBottom: '36px' }}
         />
-        <div style={{ marginBottom: '16px' }} />
 
-        <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            Descrição:
-          </Text>{' '}
-          {categoryInformation.descricao}{' '}
-        </Text>
-        <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            Idade mínima:
-          </Text>{' '}
-          {categoryInformation.idadeMin}{' '}
-        </Text>
-        <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            Idade máxima:{' '}
-          </Text>{' '}
-          {categoryInformation.idadeMax}{' '}
-        </Text>
-        <Text variant="h7" style={{ marginBottom: '16px' }}>
-          <Text variant="h7" weight="bold">
-            Dupla:{' '}
-          </Text>{' '}
-          {categoryInformation.isDupla ? 'Sim' : 'Não'}{' '}
-        </Text>
+        <Container justifyContent="center">
+          <img
+            src="/athlete.png"
+            alt="athlete.png"
+            style={{ width: '200px', padding: '20px' }}
+          />
+        </Container>
 
         <Grid xs="1fr 1fr" spacing="16px">
           <Button variant="outlined" color="error" onClick={onClose}>

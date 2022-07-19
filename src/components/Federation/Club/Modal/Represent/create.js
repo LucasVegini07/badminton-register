@@ -54,10 +54,7 @@ const createModal = ({ open, onClose, selectedClub, updatRepresentants }) => {
     };
 
     return (
-      <Container
-        flexDirection="column"
-        style={{ padding: '20px' }}
-      >
+      <Container flexDirection="column" style={{ padding: '20px' }}>
         <Text weight="bold">Adicione um novo representante</Text>
         <Divider style={{ margin: '16px 0px' }} />
         <Input
@@ -76,7 +73,6 @@ const createModal = ({ open, onClose, selectedClub, updatRepresentants }) => {
           onChange={e =>
             setRepresentant({ ...representant, senha: e.target.value })
           }
-          type="password"
         />
         <div style={{ marginBottom: '16px' }} />
         <Grid xs="1fr 1fr" spacing="16px">

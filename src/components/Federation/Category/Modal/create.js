@@ -10,6 +10,7 @@ import {
   Grid,
   TextArea,
   Checkbox,
+  ComboBoxSingleSelect,
 } from '@develop-fapp/ui-kit-fapp';
 
 import { useGeneralContext } from '~/context/GeneralContext';
@@ -17,10 +18,22 @@ import { useGeneralContext } from '~/context/GeneralContext';
 const createModal = ({ open, onClose, updatCategory }) => {
   const { setErrorMessage, setSuccessMessage } = useGeneralContext();
 
+  const options = [
+    { label: 'Individual masculino', value: 'Individual masculino' },
+    { label: 'Individual feminino', value: 'Individual feminino' },
+    { label: 'Dupla feminina', value: 'Dupla feminina' },
+    { label: 'Dupla masculina', value: 'Dupla masculina' },
+    { label: 'Dupla mista', value: 'Dupla mista' },
+  ];
+
+  const [typeCategory, setTypeCategory] = useState({
+    label: 'Individual masculino',
+    value: 'Individual masculino',
+  });
+
   const [category, setCategory] = useState({
     nome: '',
     descricao: '',
-    isDupla: false,
     idadeMax: '',
     idadeMin: '',
   });
@@ -45,17 +58,24 @@ const createModal = ({ open, onClose, updatCategory }) => {
         );
       }
 
+      const newCategory = { ...category };
+
+      newCategory.dupla = typeCategory.value;
+
       try {
-        await axios.post(`${process.env.NEXT_PUBLIC_URL}/categoria`, category, {
-          headers: { 'Access-Control-Allow-Origin': '*' },
-        });
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_URL}/categoria`,
+          newCategory,
+          {
+            headers: { 'Access-Control-Allow-Origin': '*' },
+          },
+        );
 
         updatCategory();
         onClose();
         setCategory({
           nome: '',
           descricao: '',
-          isDupla: false,
           idadeMax: '',
           idadeMin: '',
         });
@@ -66,19 +86,22 @@ const createModal = ({ open, onClose, updatCategory }) => {
     };
 
     return (
-      <Container
-        flexDirection="column"
-        style={{ padding: '20px' }}
-      >
+      <Container flexDirection="column" style={{ padding: '20px' }}>
         <Text weight="bold">Adicione uma nova categoria</Text>
         <Divider style={{ margin: '16px 0px' }} />
         <Input
-          style={{ marginBottom: '16px' }}
           placeholder="Nome"
           value={category.nome}
           onChange={e => setCategory({ ...category, nome: e.target.value })}
         />
         <div style={{ marginBottom: '16px' }} />
+        <ComboBoxSingleSelect
+          items={options}
+          onChange={setTypeCategory}
+          value={typeCategory}
+          placeholder="Tipo"
+          style={{ marginBottom: '16px' }}
+        />
         <TextArea
           placeholder="Descrição"
           value={category.descricao}
@@ -88,7 +111,6 @@ const createModal = ({ open, onClose, updatCategory }) => {
         />
         <div style={{ marginBottom: '16px' }} />
         <Input
-          style={{ marginBottom: '16px' }}
           placeholder="Idade mínima"
           value={category.idadeMin}
           onChange={e => setCategory({ ...category, idadeMin: e.target.value })}
@@ -96,22 +118,13 @@ const createModal = ({ open, onClose, updatCategory }) => {
         />
         <div style={{ marginBottom: '16px' }} />
         <Input
-          style={{ marginBottom: '16px' }}
           placeholder="Idade máxima"
           value={category.idadeMax}
           onChange={e => setCategory({ ...category, idadeMax: e.target.value })}
           type="number"
         />
-        <Container alignItems="center">
-          <Checkbox
-            type="checkbox"
-            onChange={e =>
-              setCategory({ ...category, isDupla: e.target.checked })
-            }
-            checked={category.isDupla}
-          />
-          <Text variant="h7">Atividade em dupla</Text>
-        </Container>
+        <div style={{ marginBottom: '16px' }} />
+
         <Grid xs="1fr 1fr" spacing="16px">
           <Button variant="outlined" color="error" onClick={onClose}>
             Cancelar
