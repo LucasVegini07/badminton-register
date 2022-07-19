@@ -1,3 +1,5 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import {
@@ -36,17 +38,13 @@ const competitionModal = ({ open, onClose, selectedCompetition }) => {
                   `${process.env.NEXT_PUBLIC_URL}/atletas/id/${athleteAux?.categoriasCompeticoesAtletas?.atletaId2}`,
                   {},
                 )
-                .then(response => {
-                  console.log('1: ', newAtlhetes);
-                  console.log('i: ', i);
-                  if (newAtlhetes[i] && response.data.cpf)
-                    newAtlhetes[i].atlhete2cpf = response.data.cpf;
+                .then(response2 => {
+                  if (newAtlhetes[i] && response2.data.cpf)
+                    newAtlhetes[i].atlhete2cpf = response2.data.cpf;
                 });
             }
             i += 1;
           }
-
-          console.log('2: ', newAtlhetes);
 
           setAthletes(newAtlhetes);
         });

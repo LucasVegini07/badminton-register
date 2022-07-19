@@ -11,7 +11,6 @@ import {
 } from '@develop-fapp/ui-kit-fapp';
 
 import { useGeneralContext } from '~/context/GeneralContext';
-import { DataFromBackend } from '~/shared/utils/utils';
 
 const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
   const { setErrorMessage, setSuccessMessage } = useGeneralContext();
@@ -62,8 +61,6 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
 
         setAthlete({ value: newAtlhetes[0].id, label: newAtlhetes[0].nome });
       } else {
-        console.log('3');
-
         allAthletes.map(athleteAux =>
           newAtlhetes.push({ value: athleteAux.id, label: athleteAux.nome }),
         );
@@ -159,8 +156,6 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
           idAtleta: athlete.value,
         };
 
-        console.log(atleta)
-
       try {
         await axios.post(
           `${process.env.NEXT_PUBLIC_URL}/competicoes/${selectedCompetition.id}/inscrever`,
@@ -212,8 +207,6 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
             if (atleta.sexo === response.data.sexo) {
               setSuccessMessage('Atleta validado com sucesso ');
               setDisabledButton(false);
-
-              console.log(athlete2);
             } else {
               setErrorMessage(
                 'O sexo do atleta informado não é compatível com a competição',

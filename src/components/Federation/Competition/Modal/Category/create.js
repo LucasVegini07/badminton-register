@@ -26,8 +26,6 @@ const createModal = ({
   const [options, setOptions] = useState([]);
   const [categoryInformation, setCategoryInformation] = useState({});
 
-  console.log(category);
-
   useEffect(() => {
     if (category.value && options.length > 0) {
       const categoria = categories.find(
