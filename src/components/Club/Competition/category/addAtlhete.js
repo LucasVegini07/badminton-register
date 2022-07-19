@@ -198,9 +198,11 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
               categoryAux => categoryAux.id === category.value,
             );
 
-            if (categoria.dupla === 'Dupla mista')
-              return setSuccessMessage('Atleta adicionado com sucesso');
+            if (categoria.dupla === 'Dupla mista') {
+              setDisabledButton(false);
 
+              return setSuccessMessage('Atleta adicionado com sucesso');
+            }
             if (atleta.cpf === response.data.cpf) {
               return setErrorMessage(
                 'Atleta 2 não pode ser o mesmo que o que o atleta 1',
