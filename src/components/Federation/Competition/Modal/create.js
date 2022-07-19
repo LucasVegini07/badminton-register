@@ -76,7 +76,7 @@ const createModal = ({ open, onClose, updatCompetitions }) => {
         flexDirection="column"
         style={{ padding: '20px'}}
       >
-        <Text weight="bold">Adicione uma nova categoria</Text>
+        <Text weight="bold">Adicione uma nova competição</Text>
         <Divider style={{ margin: '16px 0px' }} />
         <Input
           style={{ marginBottom: '16px' }}

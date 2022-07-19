@@ -76,8 +76,11 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
         setIsDupla(true);
         setDisabledButton(true);
       }
-      setAthletes(newAtlhetes);
-      setAthlete(newAtlhetes[0]);
+
+      if (newAtlhetes.length > 0) {
+        setAthletes(newAtlhetes);
+        setAthlete(newAtlhetes[0]);
+      }
     }
   }, [category]);
 
@@ -220,7 +223,10 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
     };
 
     return (
-      <Container flexDirection="column" style={{ padding: '20px' }}>
+      <Container
+        flexDirection="column"
+        style={{ padding: '20px', width: '600px' }}
+      >
         <Text style={{ marginBottom: '16px' }}>
           Adicione um atleta na competição {selectedCompetition.nome}
         </Text>
@@ -233,15 +239,18 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
           onChange={setCategory}
         />
 
-        <ComboBoxSingleSelect
-          items={athletes}
-          placeholder="Atleta"
-          style={{ marginBottom: '16px' }}
-          value={athlete}
-          onChange={setAthlete}
-        />
-
-        {isDupla && (
+        {athletes.length && athlete?.value > 0 ? (
+          <ComboBoxSingleSelect
+            items={athletes}
+            placeholder="Atleta"
+            style={{ marginBottom: '16px' }}
+            value={athlete}
+            onChange={setAthlete}
+          />
+        ) : (
+          <Text>Você não tem nenhum atleta que se encaixe nessa categoria</Text>
+        )}
+        {isDupla && athletes.length > 0 && athlete?.value && (
           <InputButton
             input={{
               placeholder: 'Atleta 2 - CPF',
@@ -270,7 +279,7 @@ const addAthelteModal = ({ open, onClose, selectedCompetition }) => {
             Cancelar
           </Button>
           <Button
-            disabled={disabledButton}
+            disabled={disabledButton || athletes.length < 1}
             variant="contained"
             onClick={AddAthlete}
           >

@@ -82,7 +82,7 @@ const competitionModal = ({ open, onClose, selectedCompetition }) => {
     return (
       <Container
         flexDirection="column"
-        style={{ padding: '20px', width: '500px' }}
+        style={{ padding: '20px', width: '600px' }}
       >
         <Text weight="bold" style={{ marginBottom: '16px' }}>
           Atletas inscritos na competição
