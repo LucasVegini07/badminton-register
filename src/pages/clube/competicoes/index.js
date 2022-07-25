@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Profile2User, Add } from 'iconsax-react';
 import { Container, Text } from '@develop-fapp/ui-kit-fapp';
 import axios from 'axios';
-import CategoryModal from '../../components/Club/Competition/category';
-import Template from '../../components/Template/Club';
+import { useRouter } from 'next/router';
+import CategoryModal from '../../../components/Club/Competition/category';
+import Template from '../../../components/Template/Club';
 import { DataFromBackend } from '~/shared/utils/utils';
-import AddAthelteModal from '../../components/Club/Competition/category/addAtlhete';
+import AddAthelteModal from '../../../components/Club/Competition/category/addAtlhete';
 
 const Competitions = () => {
+  const router = useRouter();
   const [openRegisterAthlete, setOpenRegisterAthlete] = useState(false);
 
   const [selectedCompetition, setSelectedCompetition] = useState({
@@ -108,18 +110,11 @@ const Competitions = () => {
                     </Text>
                   </Container>
                   <Container justifyContent="center">
-                    <Profile2User
-                      style={{ marginRight: '12px' }}
-                      onClick={() => {
-                        setSelectedCompetition(competicao);
-                        setOpenRegisterAthlete(true);
-                      }}
-                    />
                     <Add
                       style={{ marginRight: '12px' }}
                       onClick={() => {
-                        setSelectedCompetition(competicao);
-                        setOpenAddAthlete(true);
+                        localStorage.setItem('competicaoId', competicao.id);
+                        router.push('/clube/competicoes/register');
                       }}
                     />
                   </Container>

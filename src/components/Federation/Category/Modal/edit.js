@@ -59,10 +59,14 @@ const createModal = ({
           'Campo idade máxima não pode ser menor que idade mínima',
         );
       }
+      if (!selectedCategory.paid) {
+        return setErrorMessage('Valor não pode ser inválido');
+      }
 
       const newCategory = { ...selectedCategory };
 
       newCategory.dupla = typeCategory.value;
+      newCategory.paid = parseFloat(selectedCategory.paid);
 
       try {
         await axios.put(
@@ -141,6 +145,20 @@ const createModal = ({
             setSelectedCategory({
               ...selectedCategory,
               idadeMax: e.target.value,
+            })
+          }
+          type="number"
+        />
+        <div style={{ marginBottom: '16px' }} />
+
+        <Input
+          style={{ marginBottom: '16px' }}
+          placeholder="Valor"
+          value={selectedCategory.paid}
+          onChange={e =>
+            setSelectedCategory({
+              ...selectedCategory,
+              paid: e.target.value,
             })
           }
           type="number"

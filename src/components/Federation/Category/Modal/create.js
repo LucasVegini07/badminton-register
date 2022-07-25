@@ -36,6 +36,7 @@ const createModal = ({ open, onClose, updatCategory }) => {
     descricao: '',
     idadeMax: '',
     idadeMin: '',
+    paid: '',
   });
 
   const content = () => {
@@ -57,10 +58,14 @@ const createModal = ({ open, onClose, updatCategory }) => {
           'Campo idade máxima não pode ser menor que idade mínima',
         );
       }
+      if (!category.paid) {
+        return setErrorMessage('Campo valor inválido');
+      }
 
       const newCategory = { ...category };
 
       newCategory.dupla = typeCategory.value;
+      newCategory.paid = parseFloat(category.paid);
 
       try {
         await axios.post(
@@ -78,6 +83,7 @@ const createModal = ({ open, onClose, updatCategory }) => {
           descricao: '',
           idadeMax: '',
           idadeMin: '',
+          paid: '',
         });
         return setSuccessMessage('Categoria cadastrada com sucesso');
       } catch (e) {
@@ -121,6 +127,14 @@ const createModal = ({ open, onClose, updatCategory }) => {
           placeholder="Idade máxima"
           value={category.idadeMax}
           onChange={e => setCategory({ ...category, idadeMax: e.target.value })}
+          type="number"
+        />
+        <div style={{ marginBottom: '16px' }} />
+
+        <Input
+          placeholder="Valor"
+          value={category.paid}
+          onChange={e => setCategory({ ...category, paid: e.target.value })}
           type="number"
         />
         <div style={{ marginBottom: '16px' }} />

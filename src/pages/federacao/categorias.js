@@ -131,13 +131,15 @@ const CategoryPage = () => {
         onClose={() => setOpen(false)}
         updatCategory={updatCategory}
       />
-      <EditModal
-        open={openEditModal}
-        onClose={() => setOpenEditModal(false)}
-        updatCategory={updatCategory}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      {openEditModal && (
+        <EditModal
+          open={openEditModal}
+          onClose={() => setOpenEditModal(false)}
+          updatCategory={updatCategory}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      )}
       <DeleteModal
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
