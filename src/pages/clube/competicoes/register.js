@@ -121,7 +121,9 @@ const Registration = () => {
       const newAtlhetesClubAux = [];
       const newAtlhetesAux = [];
 
-      const type = category.label.split('-')[1].trim();
+      const typeAux = category.label.split(' ');
+
+      const type = `${typeAux[typeAux.length - 2]} ${typeAux[typeAux.length - 1]}`;
 
       if (type === 'Individual masculino' || type === 'Dupla masculina') {
         allAtlhetesClub.map(
