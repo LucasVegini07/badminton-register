@@ -18,13 +18,13 @@ export const GeneralContextProvider: React.FC = ({ children }) => {
     if (errorMessage) {
       setTimeout(() => {
         setErrorMessage('');
-      }, 10000);
+      }, 5000);
     }
 
     if (successMessage) {
       setTimeout(() => {
         setSuccessMessage('');
-      }, 10000);
+      }, 5000);
     }
   }, [errorMessage, successMessage]);
 

@@ -4,6 +4,8 @@ import {
   Text,
   Button,
   ComboBoxSingleSelect,
+  Checkbox,
+  Modal,
 } from '@develop-fapp/ui-kit-fapp';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -27,6 +29,10 @@ const Registration = () => {
   const [isDupla, setIsDupla] = useState(false);
 
   const [registredAhtletes, setRegistredAhtletes] = useState([]);
+
+  const [confirmDecision, setConfirmDecision] = useState(true);
+
+  const [openDecision, setOpenDecision] = useState(false);
 
   useEffect(() => {
     axios
@@ -111,16 +117,11 @@ const Registration = () => {
   useEffect(async () => {
     await getRegistredAhtletes();
 
-    console.log('allAtlhetesClub: ', allAtlhetesClub);
-    console.log('allAtlhetes: ', allAtlhetes);
-
     if (category.label) {
       const newAtlhetesClubAux = [];
       const newAtlhetesAux = [];
 
       const type = category.label.split('-')[1].trim();
-
-      console.log(type);
 
       if (type === 'Individual masculino' || type === 'Dupla masculina') {
         allAtlhetesClub.map(
@@ -177,9 +178,6 @@ const Registration = () => {
         setIsDupla(true);
       }
 
-      console.log('newAtlhetesClubAux: ', newAtlhetesClubAux);
-      console.log('newAtlhetesAux: ', newAtlhetesAux);
-
       setAthletesComboBox(newAtlhetesAux);
       setAthleteComboBox(newAtlhetesAux[0]);
       setAthletesClubComboBox(newAtlhetesClubAux);
@@ -202,8 +200,6 @@ const Registration = () => {
         idAtleta: ahtleteClubComboBox.value,
       };
 
-    console.log(atleta);
-
     if (atleta.idAtleta === atleta.idAtleta2) {
       return setErrorMessage('Atleta 1 não pode ser igual a dupla');
     }
@@ -219,11 +215,19 @@ const Registration = () => {
         },
       );
       await getRegistredAhtletes();
-
+      setOpenDecision(false);
       return setSuccessMessage('Atleta adicionado com sucesso');
     } catch (e) {
       return setErrorMessage('O serviço não conseguiu se conectar na api');
     }
+  };
+
+  const handleRegisterAthleta = () => {
+    if (confirmDecision) {
+      return setOpenDecision(true);
+    }
+
+    return handleRegister();
   };
 
   return (
@@ -265,13 +269,21 @@ const Registration = () => {
             <ComboBoxSingleSelect
               items={athletesComboBox}
               placeholder="Dupla"
-              style={{ marginBottom: '16px' }}
               value={athleteComboBox}
               onChange={setAthleteComboBox}
             />
           )}
 
-          <Button variant="contained" onClick={handleRegister}>
+          <Container alignItems="center">
+            <Checkbox
+              type="checkbox"
+              onChange={e => setConfirmDecision(e.target.checked)}
+              checked={confirmDecision}
+            />
+            <Text> Confirmar decisão </Text>
+          </Container>
+
+          <Button variant="contained" onClick={handleRegisterAthleta}>
             Registrar atleta
           </Button>
         </Container>
@@ -354,6 +366,38 @@ const Registration = () => {
           })}
         </Container>
       </Grid>
+      <Modal
+        onClose={() => setOpenDecision(false)}
+        open={openDecision}
+        modalContent={
+          <Container
+            flexDirection="column"
+            style={{ padding: '16px', width: '400px' }}
+          >
+            <Text weight="bold" style={{ marginBottom: '16px' }}>
+              Registrar atleta(s)
+            </Text>
+            <Text variant="h7" style={{ marginBottom: '16px' }}>
+              Ao confirmar, você estára cadastrando{' '}
+              <b>
+                {' '}
+                {isDupla
+                  ? `${ahtleteClubComboBox.label} e ${athleteComboBox.label}`
+                  : `${ahtleteClubComboBox.label}`}
+              </b>{' '}
+              na categoria {category.label}
+            </Text>
+            <Container justifyContent="space-between">
+              <Button variant="outlined" onClick={() => setOpenDecision(false)}>
+                Não
+              </Button>
+              <Button variant="contained" onClick={handleRegister}>
+                Sim
+              </Button>
+            </Container>
+          </Container>
+        }
+      />
     </Template>
   );
 };
